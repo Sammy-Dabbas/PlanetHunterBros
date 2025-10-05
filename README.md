@@ -1,5 +1,5 @@
-# 🌌 Exoplanet Detection System
-
+# Exoplanet Detection System
+Check out the site live here: https://exoplanet-detector-430968814485.us-central1.run.app/
 Advanced AI/ML system for identifying exoplanets from NASA mission data (Kepler, K2, TESS). Built for NASA Space Apps Challenge.
 
 ## Features
@@ -35,7 +35,7 @@ Advanced AI/ML system for identifying exoplanets from NASA mission data (Kepler,
 
 ### Local Setup
 ```bash
-# Install dependencies
+
 pip install -r requirements.txt
 
 # Run the application
