@@ -60,6 +60,15 @@ Advanced AI/ML system for identifying exoplanets from NASA mission data (Kepler,
   <img src="screenshot/AB testing.png" width="45%" alt="Adversarial Testing" />
 </p>
 
+### Visualizations & Analysis
+<p align="center">
+  <img src="screenshot/transitlightcurve.png" width="45%" alt="Transit Light Curve" />
+  <img src="screenshot/phasefoldedlightcurve.png" width="45%" alt="Phase-Folded Light Curve" />
+</p>
+<p align="center">
+  <img src="screenshot/comparewithsolarsystem.png" width="60%" alt="Solar System Comparison" />
+</p>
+
 ## Usage Guide
 
 ### Try it Live
