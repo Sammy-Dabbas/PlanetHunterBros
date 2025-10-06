@@ -38,35 +38,35 @@ Advanced AI/ML system for identifying exoplanets from NASA mission data (Kepler,
 
 ### Data Upload & Training
 <p align="center">
-  <img src="screenshot/UploadDataset.png" width="45%" alt="Upload Dataset" />
-  <img src="screenshot/ModelTrainingTab.png" width="45%" alt="Model Training" />
+  <img src="Screenshot/UploadDataset.png" width="45%" alt="Upload Dataset" />
+  <img src="Screenshot/ModelTrainingTab.png" width="45%" alt="Model Training" />
 </p>
 
 ### Model Performance & Analysis
 <p align="center">
-  <img src="screenshot/ModelPerformanceMetrics.png" width="45%" alt="Performance Metrics" />
-  <img src="screenshot/ConfusionMatrix.png" width="45%" alt="Confusion Matrix" />
+  <img src="Screenshot/ModelPerformanceMetrics.png" width="45%" alt="Performance Metrics" />
+  <img src="Screenshot/ConfusionMatrix.png" width="45%" alt="Confusion Matrix" />
 </p>
 
 ### Predictions & TESS Integration
 <p align="center">
-  <img src="screenshot/KeplerTrainResult.png" width="45%" alt="Kepler Results" />
-  <img src="screenshot/RecentTess.png" width="45%" alt="TESS Predictions" />
+  <img src="Screenshot/KeplerTrainResult.png" width="45%" alt="Kepler Results" />
+  <img src="Screenshot/RecentTess.png" width="45%" alt="TESS Predictions" />
 </p>
 
 ### Advanced Features
 <p align="center">
-  <img src="screenshot/FeaturerImportance.png" width="45%" alt="Feature Importance" />
-  <img src="screenshot/AB testing.png" width="45%" alt="Adversarial Testing" />
+  <img src="Screenshot/FeaturerImportance.png" width="45%" alt="Feature Importance" />
+  <img src="Screenshot/AB testing.png" width="45%" alt="Adversarial Testing" />
 </p>
 
 ### Visualizations & Analysis
 <p align="center">
-  <img src="screenshot/transitlightcurve.png" width="45%" alt="Transit Light Curve" />
-  <img src="screenshot/phasefoldedlightcurve.png" width="45%" alt="Phase-Folded Light Curve" />
+  <img src="Screenshot/transitlightcurve.png" width="45%" alt="Transit Light Curve" />
+  <img src="Screenshot/phasefoldedlightcurve.png" width="45%" alt="Phase-Folded Light Curve" />
 </p>
 <p align="center">
-  <img src="screenshot/comparewithsolarsystem.png" width="60%" alt="Solar System Comparison" />
+  <img src="Screenshot/comparisonwithsolarsystem.png" width="60%" alt="Solar System Comparison" />
 </p>
 
 ## Usage Guide
