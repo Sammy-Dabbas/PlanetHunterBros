@@ -31,31 +31,10 @@ Advanced AI/ML system for identifying exoplanets from NASA mission data (Kepler,
 - **Visualization**: Plotly, matplotlib, seaborn
 - **NASA APIs**: TESS Archive integration via requests
 
-## Quick Start
 
-### Local Setup
-```bash
 
-pip install -r requirements.txt
 
-# Run the application
-python app.py
-
-# Open browser to http://localhost:5000
-```
-
-### Docker Deployment
-```bash
-docker build -t exoplanet-detector .
-docker run -p 8080:8080 exoplanet-detector
-```
-
-### Google Cloud Run
-```bash
-gcloud run deploy exoplanet-detector --source . --platform managed --region us-central1 --allow-unauthenticated
-```
-
-## 📸 Screenshots
+## Screenshots
 
 ### Data Upload & Training
 <p align="center">
@@ -81,15 +60,42 @@ gcloud run deploy exoplanet-detector --source . --platform managed --region us-c
   <img src="screenshot/AB testing.png" width="45%" alt="Adversarial Testing" />
 </p>
 
-## 📖 Usage Guide
+## Usage Guide
 
-1. **Upload Data**: Use pre-loaded datasets or upload custom exoplanet data (CSV)
-2. **Train Model**: Select algorithm, tune hyperparameters, and train on your data
-3. **Make Predictions**: Predict on test data, TESS TOIs, or manual inputs
-4. **Analyze Results**: View metrics, confusion matrices, ROC curves, and feature importance
-5. **Download Models**: Save trained models for later use
+### Try it Live
+Visit the live website: https://exoplanet-detector-430968814485.us-central1.run.app/
 
-## 📁 Project Structure
+### Testing with Demo Data
+
+#### Step 1: Upload Training Data
+1. Click "Data Upload" tab
+2. Click "Choose File"
+3. Select: `demo_data/kepler_train.csv`
+4. Click "Upload & Analyze"
+5. See dataset statistics
+
+#### Step 2: Train Model
+1. Click "Train Model" tab
+2. Select Model Type: XGBoost (best performance)
+3. Check "Use SMOTE for class balancing"
+4. Click "Train Model"
+5. Wait ~30 seconds
+6. See performance metrics (expect ~89% accuracy, ~96% ROC AUC)
+
+#### Step 3: Make Predictions on Test Data
+1. Click "Predictions" tab
+2. Click "Batch Upload"
+3. Select: `demo_data/kepler_test.csv` or `demo_data/demo_10_samples.csv` (for quick testing)
+4. Click "Predict"
+5. See results with confidence scores for all samples!
+
+#### Step 4: Visualizations
+1. Click "Visualizations" tab
+2. Click "Performance Metrics" → See accuracy, F1, ROC AUC
+3. Click "Confusion Matrix" → See true/false positives
+4. Click "Feature Importance" → See which features matter most
+
+## Project Structure
 ```
 ├── app.py                 # Main Flask application
 ├── src/                   # Core modules
@@ -111,13 +117,41 @@ gcloud run deploy exoplanet-detector --source . --platform managed --region us-c
 ## NASA Space Apps Challenge
 This project was developed for the NASA Space Apps Challenge 2024, demonstrating practical applications of machine learning in space exploration and exoplanet research.
 
+
+
+
+
+### Local Setup
+```bash
+
+pip install -r requirements.txt
+
+# Run the application
+python app.py
+
+# Open browser to http://localhost:5000
+```
+
+### Docker Deployment
+```bash
+docker build -t exoplanet-detector .
+docker run -p 8080:8080 exoplanet-detector
+```
+
+### Google Cloud Run
+```bash
+gcloud run deploy exoplanet-detector --source . --platform managed --region us-central1 --allow-unauthenticated
+```
+
+
+
+
+
+
+
+
 ##  License
 MIT License - See LICENSE file for details
 
 ##  Contributing
 Contributions welcome! Please read our contribution guidelines and submit pull requests.
-
-## 📚 Documentation
-- [Quickstart Guide](docs/QUICKSTART_FOR_JUDGES.md)
-- [Dataset Information](docs/DATASETS_USED.md)
-- [References & Resources](docs/REFERENCES.md)
