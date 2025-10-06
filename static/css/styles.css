@@ -1,0 +1,425 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1d3a 100%);
+    color: #e0e0e0;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(100, 200, 255, 0.3);
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #64c8ff;
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px rgba(100, 200, 255, 0.5);
+}
+
+.subtitle {
+    color: #b0b0b0;
+    font-size: 1.1em;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.tab-button {
+    flex: 1;
+    min-width: 150px;
+    padding: 12px 20px;
+    background: rgba(100, 200, 255, 0.1);
+    border: 2px solid rgba(100, 200, 255, 0.3);
+    border-radius: 8px;
+    color: #e0e0e0;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+.tab-button:hover {
+    background: rgba(100, 200, 255, 0.2);
+    border-color: rgba(100, 200, 255, 0.5);
+}
+
+.tab-button.active {
+    background: linear-gradient(135deg, #4a9eff 0%, #64c8ff 100%);
+    border-color: #64c8ff;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(100, 200, 255, 0.4);
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h2 {
+    color: #64c8ff;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+h3 {
+    color: #8dd5ff;
+    margin: 20px 0 10px 0;
+    font-size: 1.3em;
+}
+
+.upload-section,
+.form-section {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+input[type="file"] {
+    display: block;
+    margin: 15px 0;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px dashed rgba(100, 200, 255, 0.3);
+    border-radius: 8px;
+    color: #e0e0e0;
+    width: 100%;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    padding: 10px;
+    background: rgba(10, 14, 39, 0.95);
+    border: 2px solid rgba(100, 200, 255, 0.3);
+    border-radius: 6px;
+    color: #e0e0e0;
+    font-size: 1em;
+    width: 100%;
+}
+
+select option {
+    background: #0a0e27;
+    color: #e0e0e0;
+    padding: 10px;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+    outline: none;
+    border-color: #64c8ff;
+    box-shadow: 0 0 10px rgba(100, 200, 255, 0.3);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #b0b0b0;
+}
+
+.btn {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #4a9eff 0%, #64c8ff 100%);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 5px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(100, 200, 255, 0.4);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffa06b 100%);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 6px 20px rgba(255, 106, 106, 0.4);
+}
+
+.status-box {
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.status-box.success {
+    background: rgba(76, 175, 80, 0.2);
+    border: 2px solid rgba(76, 175, 80, 0.5);
+    color: #90ee90;
+}
+
+.status-box.error {
+    background: rgba(244, 67, 54, 0.2);
+    border: 2px solid rgba(244, 67, 54, 0.5);
+    color: #ff9999;
+}
+
+.status-box.info {
+    background: rgba(100, 200, 255, 0.2);
+    border: 2px solid rgba(100, 200, 255, 0.5);
+    color: #64c8ff;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.stats-container,
+.results-container {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+#statsContent,
+#metricsDisplay,
+#predictionsDisplay {
+    display: grid;
+    gap: 15px;
+}
+
+.stat-item,
+.metric-item {
+    background: rgba(100, 200, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #64c8ff;
+}
+
+.stat-item strong,
+.metric-item strong {
+    color: #64c8ff;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.hyperparams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.predict-options {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.predict-section {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.manual-input-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.viz-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+#vizContainer {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    min-height: 400px;
+}
+
+.about-section {
+    line-height: 1.8;
+}
+
+.about-section ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.about-section li {
+    margin-bottom: 8px;
+}
+
+.about-section a {
+    color: #64c8ff;
+    text-decoration: none;
+}
+
+.about-section a:hover {
+    text-decoration: underline;
+}
+
+.prediction-card {
+    background: linear-gradient(135deg, rgba(100, 200, 255, 0.1) 0%, rgba(100, 200, 255, 0.05) 100%);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border: 2px solid rgba(100, 200, 255, 0.3);
+}
+
+.prediction-result {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.prediction-result.exoplanet {
+    color: #90ee90;
+}
+
+.prediction-result.not-exoplanet {
+    color: #ff9999;
+}
+
+.confidence-bar {
+    height: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    overflow: visible;
+    margin: 10px 0;
+    position: relative;
+}
+
+.confidence-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4a9eff 0%, #90ee90 100%);
+    transition: width 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+    color: white;
+    font-weight: bold;
+    border-radius: 15px;
+    min-width: 80px;
+    white-space: nowrap;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.metric-card {
+    background: rgba(100, 200, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid rgba(100, 200, 255, 0.3);
+}
+
+.metric-value {
+    font-size: 2em;
+    font-weight: bold;
+    color: #64c8ff;
+    margin: 10px 0;
+}
+
+.metric-label {
+    color: #b0b0b0;
+    font-size: 0.9em;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .tabs {
+        flex-direction: column;
+    }
+
+    .tab-button {
+        width: 100%;
+    }
+
+    .hyperparams-grid,
+    .manual-input-grid,
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Advanced feature button styling */
+.btn-advanced {
+    background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+    border: 2px solid #ff8c42;
+    box-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
+}
+
+.btn-advanced:hover {
+    background: linear-gradient(135deg, #ff8c42 0%, #ffab42 100%);
+    box-shadow: 0 0 25px rgba(255, 107, 53, 0.5);
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #ffa726 0%, #fb8c00 100%);
+    border: 2px solid #ffb74d;
+}
+
+.btn-warning:hover {
+    background: linear-gradient(135deg, #ffb74d 0%, #ffa726 100%);
+}

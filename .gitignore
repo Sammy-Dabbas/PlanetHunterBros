@@ -1,0 +1,130 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+env.bak/
+venv.bak/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Windows special files
+nul
+con
+prn
+aux
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Cache
+.cache/
+*.cache
+
+# Temporary and utility scripts
+fix_timestamps.py
+check_files.py
+check_gitignore.py
+convert_to_pptx.py
+NASA_SpaceApps_Presentation_Styled.pptx
+show_tracked_files.py
+
+# Trash folder
+trash/
+
+# Office temporary files
+~$*
+*.tmp
+
+# PowerPoint presentations
+*.pptx
+*.ppt
+
+# Uploaded data files 
+uploads/
+!uploads/.gitkeep
+
+# Trained models 
+models/
+!models/.gitkeep
+
+# Pretrained models folder
+pretrained_models/
+!pretrained_models/.gitkeep
+
+# Data files 
+data/raw/
+data/processed/
+*.csv
+!demo_data/*.csv
+!data/kepler_exoplanets.csv
+!data/tess_exoplanets.csv
+
+# Model files
+*.pkl
+*.h5
+*.hdf5
+*.parquet
+
+# Documentation that's redundant or too verbose
+HACKATHON_SUBMISSION.md
+docs/100X_IMPROVEMENT_PLAN.md
+docs/PHASE1_IMPROVEMENTS_COMPLETE.md
+docs/PROJECT_COMPLETE_SUMMARY.md
+docs/FINAL_SUMMARY.md
+docs/NEXT_LEVEL_FEATURES.md
+docs/NEW_FEATURES_ADDED.md
+docs/ADDITIONAL_PREDICTIONS.md
+docs/ADDITIONAL_DATA_SOURCES.md
+docs/WINNING_DEMO_SCRIPT.md
+docs/USAGE_GUIDE.md
+
+# Node modules (if using any JS tools)
+node_modules/
+

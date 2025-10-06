@@ -1,0 +1,123 @@
+# This file specifies files that are *not* uploaded to Google Cloud
+# using gcloud. It follows the same syntax as .gitignore
+
+# Windows special files
+nul
+con
+prn
+aux
+~$*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+.github/
+
+# Temporary scripts (not needed for deployment)
+fix_timestamps.py
+check_files.py
+convert_to_pptx.py
+
+# Trash folder (old code)
+trash/
+
+# Office files
+*.pptx
+*.ppt
+*.xlsx
+*.xls
+*.docx
+*.doc
+
+# Local data uploads and models (will be generated on server)
+uploads/
+models/
+pretrained_models/
+
+# Logs
+*.log
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+test_*.py
+*_test.py
+
+# Documentation (keep only essential docs)
+HACKATHON_SUBMISSION.md
+docs/100X_IMPROVEMENT_PLAN.md
+docs/PHASE1_IMPROVEMENTS_COMPLETE.md
+docs/PROJECT_COMPLETE_SUMMARY.md
+docs/FINAL_SUMMARY.md
+docs/NEXT_LEVEL_FEATURES.md
+docs/NEW_FEATURES_ADDED.md
+docs/ADDITIONAL_PREDICTIONS.md
+docs/ADDITIONAL_DATA_SOURCES.md
+docs/WINNING_DEMO_SCRIPT.md
+docs/USAGE_GUIDE.md
+docs/deployment_guide.md
+
+# Only include critical docs
+!docs/README.md
+!docs/QUICKSTART_FOR_JUDGES.md
+
+# Large data files
+*.hdf5
+*.h5
+*.parquet
+
+# Temporary files
+*.tmp
+*.bak
+temp/
+
+# Node modules
+node_modules/
+
+# Claude Code
+.claude/
+
+# Demo data (too large for deployment)
+demo_data/
+
+# Keep only essential CSV files for initial data
+!data/kepler_exoplanets.csv
+!data/tess_exoplanets.csv

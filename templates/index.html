@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exoplanet Detection System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+            color: #64b5f6;
+            margin-left: 5px;
+            font-size: 14px;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 300px;
+            background-color: #1e3a5f;
+            color: #fff;
+            text-align: left;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1000;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -150px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+            line-height: 1.4;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div style="position: absolute; top: 20px; right: 20px;">
+                <a href="https://github.com/Sammy-Dabbas/PlanetHunterBros" target="_blank" rel="noopener noreferrer"
+                   style="display: flex; align-items: center; gap: 8px; color: #64b5f6; text-decoration: none; font-size: 14px; transition: all 0.3s ease;"
+                   onmouseover="this.style.color='#90caf9'" onmouseout="this.style.color='#64b5f6'">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    <span>View on GitHub</span>
+                </a>
+            </div>
+            <h1 style="display: flex; align-items: center; justify-content: center; gap: 12px;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <circle cx="12" cy="12" r="6"></circle>
+                    <circle cx="12" cy="12" r="2"></circle>
+                </svg>
+                Exoplanet Detection System
+            </h1>
+            <p class="subtitle">AI/ML powered exoplanet discovery using NASA mission data</p>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-button active" onclick="showTab('upload')" style="display: flex; align-items: center; gap: 6px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                Data Upload
+            </button>
+            <button class="tab-button" onclick="showTab('train')" style="display: flex; align-items: center; gap: 6px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                </svg>
+                Train Model
+            </button>
+            <button class="tab-button" onclick="showTab('predict')" style="display: flex; align-items: center; gap: 6px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                Predictions
+            </button>
+            <button class="tab-button" onclick="showTab('visualize')" style="display: flex; align-items: center; gap: 6px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+                Visualizations
+            </button>
+            <button class="tab-button" onclick="showTab('about')" style="display: flex; align-items: center; gap: 6px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                About
+            </button>
+        </nav>
+
+        <!-- Upload Tab -->
+        <div id="upload" class="tab-content active">
+            <h2>Upload Dataset</h2>
+            <p>Upload Kepler, K2, or TESS exoplanet data (CSV format)</p>
+
+            <div class="upload-section">
+                <input type="file" id="dataFile" accept=".csv" />
+                <button onclick="uploadData()" class="btn btn-primary">Upload & Analyze</button>
+            </div>
+
+            <div id="uploadStatus" class="status-box hidden"></div>
+
+            <div id="dataStats" class="stats-container hidden">
+                <h3>Dataset Statistics</h3>
+                <div id="statsContent"></div>
+            </div>
+        </div>
+
+        <!-- Train Tab -->
+        <div id="train" class="tab-content">
+            <h2>Train ML Model</h2>
+
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="modelType">Model Type:
+                        <span class="tooltip">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                            <span class="tooltiptext">
+                                <strong>Random Forest:</strong> Ensemble of decision trees. Great baseline, robust to outliers.<br><br>
+                                <strong>XGBoost:</strong> Gradient boosting. Often best performance, handles imbalance well.<br><br>
+                                <strong>LightGBM:</strong> Fast gradient boosting. Best for large datasets.<br><br>
+                                <strong>Neural Network:</strong> Deep learning. Needs more data but can capture complex patterns.
+                            </span>
+                        </span>
+                    </label>
+                    <select id="modelType" onchange="updateHyperparameters()">
+                        <option value="random_forest">Random Forest</option>
+                        <option value="xgboost">XGBoost</option>
+                        <option value="lightgbm">LightGBM</option>
+                        <option value="neural_net">Neural Network</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="targetColumn">Target Column:
+                        <span class="tooltip">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                            <span class="tooltiptext">
+                                The column containing labels (CONFIRMED/FALSE POSITIVE). Default is "koi_disposition" for Kepler data.
+                            </span>
+                        </span>
+                    </label>
+                    <input type="text" id="targetColumn" value="koi_disposition" />
+                </div>
+
+                <div class="form-group">
+                    <label for="testSize">Test Size:
+                        <span class="tooltip">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                            <span class="tooltiptext">
+                                Percentage of data reserved for testing (not used in training). 0.2 = 20% test, 80% train. Higher = more reliable metrics but less training data.
+                            </span>
+                        </span>
+                    </label>
+                    <input type="number" id="testSize" value="0.2" min="0.1" max="0.5" step="0.05" />
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="useSmote" checked />
+                        Use SMOTE for class balancing
+                    </label>
+                </div>
+
+                <h3>Hyperparameters</h3>
+                <div id="hyperparameters" class="hyperparams-grid">
+                    <!-- Dynamically populated based on model type -->
+                </div>
+
+                <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 15px;">
+                    <button onclick="trainModel()" class="btn btn-primary" style="flex: 1;">Train Model</button>
+                    <button onclick="downloadModel()" class="btn" id="downloadModelBtn" style="display: none; flex: 1; background: #2ecc71;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download Model
+                    </button>
+                </div>
+
+                <div style="margin-top: 10px; padding: 15px; background: #1e3a5f; border-radius: 6px;">
+                    <h4 style="color: #64b5f6; margin-bottom: 10px; font-size: 14px;">Or load a pretrained model:</h4>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <input type="file" id="modelFile" accept=".zip" style="flex: 1;" />
+                        <button onclick="uploadModel()" class="btn" style="background: #3498db;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                            Load Model
+                        </button>
+                    </div>
+                    <p style="font-size: 11px; color: #b0b0b0; margin-top: 8px;">Upload a previously saved model (.zip file containing model.pkl and preprocessor.pkl)</p>
+                </div>
+            </div>
+
+            <div id="trainStatus" class="status-box hidden"></div>
+
+            <div id="trainResults" class="results-container hidden">
+                <h3>Training Results</h3>
+                <div id="metricsDisplay"></div>
+            </div>
+        </div>
+
+        <!-- Predict Tab -->
+        <div id="predict" class="tab-content">
+            <h2>Make Predictions</h2>
+
+            <div class="predict-options">
+                <button class="btn" onclick="showPredictOption('file')">Upload File</button>
+                <button class="btn" onclick="showPredictOption('manual')">Manual Input</button>
+                <button class="btn btn-advanced" onclick="showPredictOption('tess')">Fetch Recent TESS</button>
+                <button class="btn btn-advanced" onclick="showPredictOption('adversarial')">Test Adversarial</button>
+            </div>
+
+            <div id="predictFile" class="predict-section hidden">
+                <h3>Upload Data for Prediction</h3>
+                <input type="file" id="predictDataFile" accept=".csv" />
+                <button onclick="predictFromFile()" class="btn btn-primary">Predict</button>
+            </div>
+
+            <div id="predictManual" class="predict-section hidden">
+                <h3>Enter Data Manually</h3>
+                <p>Enter exoplanet parameters (values will be normalized automatically)</p>
+                <div class="manual-input-grid">
+                    <input type="number" placeholder="Orbital Period (days)" id="input_period" step="any" />
+                    <input type="number" placeholder="Transit Duration (hours)" id="input_duration" step="any" />
+                    <input type="number" placeholder="Transit Depth (ppm)" id="input_depth" step="any" />
+                    <input type="number" placeholder="Planetary Radius (Earth radii)" id="input_prad" step="any" />
+                    <input type="number" placeholder="Equilibrium Temp (K)" id="input_teq" step="any" />
+                    <input type="number" placeholder="Insolation Flux" id="input_insol" step="any" />
+                    <input type="number" placeholder="Signal-to-Noise Ratio" id="input_snr" step="any" />
+                    <input type="number" placeholder="Stellar Temp (K)" id="input_steff" step="any" />
+                </div>
+                <button onclick="predictManual()" class="btn btn-primary">Predict</button>
+            </div>
+
+            <div id="predictTess" class="predict-section hidden">
+                <h3>Fetch Recent TESS Discoveries</h3>
+                <p>Retrieve planets discovered by TESS in the last 30 days from NASA's ExoFOP-TESS API</p>
+                <div class="form-group">
+                    <label>Days to look back:</label>
+                    <input type="number" id="tessLookbackDays" value="30" min="1" max="365" />
+                </div>
+                <button onclick="fetchRecentTESS()" class="btn btn-primary">Fetch & Predict</button>
+            </div>
+
+            <div id="predictAdversarial" class="predict-section hidden">
+                <h3>Adversarial Robustness Testing</h3>
+                <p>Generate fake planets (binary stars, noise, grazing transits) to test model robustness</p>
+                <div class="form-group">
+                    <label>Number of test cases per type:</label>
+                    <input type="number" id="adversarialCount" value="20" min="5" max="100" />
+                </div>
+                <button onclick="generateAdversarial()" class="btn btn-warning">Generate Test Cases</button>
+                <button onclick="testAdversarial()" class="btn btn-primary" id="testAdversarialBtn" disabled>Test Robustness</button>
+            </div>
+
+            <div id="predictStatus" class="status-box hidden"></div>
+
+            <div id="predictResults" class="results-container hidden">
+                <h3>Prediction Results</h3>
+                <div id="predictionsDisplay"></div>
+            </div>
+        </div>
+
+        <!-- Visualize Tab -->
+        <div id="visualize" class="tab-content">
+            <h2>Model Visualizations</h2>
+
+            <div class="viz-buttons">
+                <button onclick="showVisualization('metrics')" class="btn">Performance Metrics</button>
+                <button onclick="showVisualization('confusion')" class="btn">Confusion Matrix</button>
+                <button onclick="showVisualization('importance')" class="btn" id="featureImportanceBtn">Feature Importance</button>
+                <button onclick="showVisualization('roc')" class="btn">ROC Curve</button>
+            </div>
+
+            <div id="vizStatus" class="status-box hidden"></div>
+            <div id="vizContainer"></div>
+        </div>
+
+        <!-- About Tab -->
+        <div id="about" class="tab-content">
+            <h2>About This System</h2>
+
+            <div class="about-section">
+                <h3>Overview</h3>
+                <p>This AI/ML system identifies exoplanets from space mission data using advanced machine learning techniques.</p>
+
+                <h3>Supported Missions</h3>
+                <ul>
+                    <li><strong>Kepler:</strong> Primary mission (2009-2013) discovering thousands of exoplanets</li>
+                    <li><strong>K2:</strong> Extended Kepler mission (2014-2018)</li>
+                    <li><strong>TESS:</strong> Transiting Exoplanet Survey Satellite (2018-present)</li>
+                </ul>
+
+                <h3>Detection Method</h3>
+                <p>The transit method detects exoplanets by measuring the decrease in stellar brightness when a planet passes between the star and the observer.</p>
+
+                <h3>Key Features</h3>
+                <ul>
+                    <li>Multiple ML algorithms (Random Forest, XGBoost, LightGBM, Neural Networks)</li>
+                    <li>Automatic feature selection and preprocessing</li>
+                    <li>SMOTE for handling class imbalance</li>
+                    <li>Real-time predictions with confidence scores</li>
+                    <li>Interactive visualizations</li>
+                    <li>Hyperparameter tuning interface</li>
+                </ul>
+
+                <h3>Data Sources</h3>
+                <p>Download datasets from NASA Exoplanet Archive:</p>
+                <ul>
+                    <li><a href="https://exoplanetarchive.ipac.caltech.edu/" target="_blank">NASA Exoplanet Archive</a></li>
+                    <li><a href="https://www.kaggle.com/datasets/nasa/kepler-exoplanet-search-results" target="_blank">Kepler Dataset (Kaggle)</a></li>
+                </ul>
+
+                <h3>Model Performance</h3>
+                <div id="currentModelStats" class="stats-display">
+                    <p>Train a model to see performance statistics</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
