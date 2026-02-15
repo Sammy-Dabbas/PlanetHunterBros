@@ -19,7 +19,7 @@ Advanced AI/ML system for identifying exoplanets from NASA mission data (Kepler,
 - **Cross-Mission Validation**: Train on Kepler, predict on TESS data
 
 ## Model Performance
-- **Accuracy**: 98%+ on Kepler test set
+- **Accuracy**: ~89.6% on Kepler test set, ~96% ROC AUC
 - **Training Data**: 9,500+ confirmed and candidate exoplanets
 - **Real-time Predictions**: <1s per exoplanet
 - **Feature Engineering**: 50+ orbital and stellar parameters
