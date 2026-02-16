@@ -142,17 +142,14 @@ def train_model():
         if not filepath or not os.path.exists(filepath):
             return jsonify({'error': 'Data file not found'}), 400
 
-        # Load and preprocess data
+        # Load data and encode target
         df = preprocessor.load_data(filepath, target_col=target_column)
-
-        # Select features
         features = preprocessor.select_features(df)
-
-        # Encode target
         df = preprocessor.encode_target(df, target_column)
 
-        # Preprocess
-        X, y = preprocessor.preprocess(df, fit=True)
+        # Extract raw features and target before any preprocessing
+        X_raw = df[preprocessor.feature_columns].copy()
+        y = df['target']
 
         # Check if we have enough classes
         n_classes = len(np.unique(y))
@@ -165,15 +162,26 @@ def train_model():
                 'n_classes': n_classes
             }), 400
 
-        # Handle class imbalance
-        if use_smote:
-            X, y = preprocessor.handle_imbalance(X, y, method='smote')
-
-        # Split data
-        X_train, X_test, y_train, y_test = train_test_split(
-            X, y, test_size=test_size, random_state=42, stratify=y
+        # Split BEFORE preprocessing to prevent data leakage
+        X_train_raw, X_test_raw, y_train, y_test = train_test_split(
+            X_raw, y, test_size=test_size, random_state=42, stratify=y
         )
 
+        # Fit preprocessor on training data only, transform both sets
+        # This creates a temporary df with 'target' for preprocess() compatibility
+        train_df = X_train_raw.copy()
+        train_df['target'] = y_train.values
+        X_train, _ = preprocessor.preprocess(train_df, fit=True)
+
+        test_df = X_test_raw.copy()
+        test_df['target'] = y_test.values
+        X_test, _ = preprocessor.preprocess(test_df, fit=False)
+
+        # Apply SMOTE only on training data to prevent leakage
+        if use_smote:
+            X_train, y_train = preprocessor.handle_imbalance(X_train, y_train, method='smote')
+
+        # Create validation split from training data
         X_train, X_val, y_train, y_val = train_test_split(
             X_train, y_train, test_size=0.2, random_state=42, stratify=y_train
         )
